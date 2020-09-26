@@ -1,8 +1,8 @@
-NAME	:= project
-DESCRIPTION := An example C project
-COMPANY := company
-COPYRIGHT := Copyright (c) 2020 Mahyar Koshkouei
-LICENSE_SPDX := 0BSD
+NAME		:= Project
+DESCRIPTION	:= An example C project
+COMPANY		:= Company
+COPYRIGHT	:= Copyright (c) 2020 Mahyar Koshkouei
+LICENSE_SPDX	:= 0BSD
 
 # Default compiler options for GCC and Clang
 CC	:= cc
@@ -61,7 +61,7 @@ $(NAME): $(OBJS) $(RES)
 		/DNAME="$(NAME)" /DICON_FILE="$(ICON_FILE)" $^
 
 clean:
-	$(RM) *.$(OBJEXT) $(EXE)
+	$(RM) *.$(OBJEXT) $(EXE) $(RES)
 
 help:
 	@cd
