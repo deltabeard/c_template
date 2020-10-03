@@ -15,8 +15,8 @@ To build on Windows with Native Tools Command Prompt for VS2019:
 * Make sure you have `gnumake.exe` in your PATH.
 * Execute `build_win.bat`. This batch file produces the variables required for a successful build on Windows NT platforms, and then passes them to GNU Make.
 
-# License
+## License
 
-Copyright (c) 2020 Mahyar Koshkouei
-Redistribution and use in source and binary forms, with or without modification, are permitted.
+Copyright (c) 2020 Mahyar Koshkouei<br/>
+Redistribution and use in source and binary forms, with or without modification, are permitted.<br/>
 THIS SOFTWARE IS PROVIDED 'AS-IS', WITHOUT ANY EXPRESS OR IMPLIED WARRANTY. IN NO EVENT WILL THE AUTHORS BE HELD LIABLE FOR ANY DAMAGES ARISING FROM THE USE OF THIS SOFTWARE. 
