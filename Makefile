@@ -40,15 +40,19 @@ ifdef VSCMD_VER
 	RM	:= del
 	EXEOUT	:= /Fe
 	CFLAGS	:= /nologo /analyze /diagnostics:caret /W3
+	# Change subsystem from CONSOLE to WINDOWS for GUI applications.
 	LDFLAGS := /link /SUBSYSTEM:CONSOLE
 	ICON_FILE := icon.ico
 	RES	:= meta\winres.res
+else ifeq ($(OS), Windows_NT)
+	err := $(error Project must be built within MSVC Native Tools Command Prompt)
 else
 	# Default compiler options for GCC and Clang
 	CC	:= cc
 	OBJEXT	:= o
 	RM	:= rm -f
 	EXEOUT	:= -o
+	# Strictly enforce C99 conformance for highest portability.
 	CFLAGS	:= -std=c99 -pedantic -Wall -Wextra
 endif
 
@@ -66,8 +70,9 @@ endif
 # No need to edit anything past this line.
 #
 EXE	:= $(NAME)
-LICENSE := $(COPYRIGHT); Released under the $(LICENSE_SPDX) License.
+LICENSE := $(COPYRIGHT); $(LICENSE_SPDX) License.
 GIT_VER := $(shell git describe --dirty --always --tags --long)
+
 
 SRCS := $(wildcard src/*.c)
 OBJS := $(SRCS:.c=.$(OBJEXT))
@@ -76,6 +81,11 @@ OBJS := $(SRCS:.c=.$(OBJEXT))
 # if we don't ask for it.
 ifeq ($(OS),Windows_NT)
 	EXE := $(NAME).exe
+	# The echo application on Windows prints text, so we execute the "title"
+	# application instead as a no operation command.
+	NULL_CMD := title
+else
+	NULL_CMD := echo
 endif
 
 # Use a fallback git version string if build system does not have git.
@@ -107,11 +117,23 @@ endif
 override CFLAGS += -Iinc $(EXTRA_CFLAGS)
 override LDFLAGS += $(EXTRA_LDFLAGS)
 
-all: $(EXE)
+define build_info_txt
+This is a $(BUILD) build with the following parameters:
+  CC      = $(CC)
+  CFLAGS  = $(CFLAGS)
+  LDFLAGS = $(LDFLAGS)
+
+endef
+
+all: info $(EXE)
 $(EXE): $(OBJS) $(RES)
 	$(info LINK $^)
 	@$(CC) $(CFLAGS) $(EXEOUT)$@ $^ $(LDFLAGS)
 	$(info OUT $@)
+
+info:
+	@$(NULL_CMD)
+	$(info $(build_info_txt))
 
 %.o: %.c
 	$(info CC $@)
@@ -132,5 +154,5 @@ clean:
 	cd src && $(RM) *.$(OBJEXT)
 
 help:
-	@cd
+	@$(NULL_CMD)
 	$(info $(help_txt))

@@ -1,19 +1,31 @@
 # c_template
 
-A C project template with some good pre-configured default settings. Only requires GNU Make.
+A C project template with some good pre-configured default settings. Only
+requires GNU Make.
 
 When starting a new project:
-* Place your .c source files in the src folder, and your .h header files in the inc folder.
-* Edit the variables at the top of the Makefile file, such as NAME, DESCRIPTION, etc.
+* Place your .c source files in the src folder, and your .h header files in the
+  inc folder.
+* Edit the variables at the top of the Makefile file, such as NAME, DESCRIPTION,
+  etc.
 * Replace the meta/icon.ico file with your own application icon.
-* If you would like to support 32-bit Windows XP platform, edit build_win.bat and follow the guide written within. Windows XP support for Visual Studio must be installed.
+* If you would like to support 32-bit Windows XP platform, edit Makefile and
+  follow the guide written within. Windows XP support for Visual Studio must be
+  installed.
+* Replace this README.md file with your own, explaining your project and how to
+  build.
 
-To build on Unix-like systems:
+To build on Unix-like platforms such as Linux, BSD, and macOS:
 * Execute GNU Make in your shell with `make`
 
-To build on Windows with Native Tools Command Prompt for VS2019:
+To build on Windows with Visual Studio Native Tools Command Prompt:
 * Make sure you have `gnumake.exe` in your PATH.
-* Execute `build_win.bat`. This batch file produces the variables required for a successful build on Windows NT platforms, and then passes them to GNU Make.
+* Execute GNU Make `gnumake` within the Native Tools for Command Prompt shell.
+
+Limitations:
+* Only one output target is supported.
+* If external libraries are required, LDLIBS must be manually added to the
+  Makefile.
 
 ## License
 
