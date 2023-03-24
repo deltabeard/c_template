@@ -1,3 +1,10 @@
+# Deprecation Notice
+
+I am no longer supporting this template because I now recommend using cmake when
+building projects for Windows NT. This keeps Makefiles simple and easy to
+understand, whilst an additional Cmakelists.txt file can be used to support a
+wide variety of operating systems that do not support GNU Make's default rules.
+
 # c_template
 
 A C project template with some good pre-configured default settings. Only
